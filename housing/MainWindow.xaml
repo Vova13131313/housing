@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:housing"
         mc:Ignorable="d"
-        Title="Інформація про житло" Height="500" Width="382" Icon="/housing.ico" Loaded="InfoHousingForm_Loaded" Activated="InfoHousingForm_Activated" ResizeMode="NoResize">
+        Title="Інформація про житло" Height="500" Width="382" Icon="/housing.ico" Loaded="InfoHousingForm_Loaded" Activated="InfoHousingForm_Activated" ResizeMode="NoResize" Closed="InfoHousingForm_Closed">
     <Grid>
         <Menu x:Name="MainManu" BorderThickness="1,1,1,1">
             <MenuItem x:Name="FileMenuItem" Header="Файл" Click="FileMenuItem_Click">
@@ -13,8 +13,8 @@
                 <MenuItem x:Name="SaveDataMenuItem" Header="Зберегти" Click="SaveDataMenuItem_Click"/>
             </MenuItem>
             <MenuItem x:Name="HousingMenuItem" Header="Житло" Click="HousingMenuItem_Click">
-                <MenuItem x:Name="EditDataMenuItem" Header="Редагувати"/>
-                <MenuItem x:Name="AddDataMenuItem" Header="Додати"/>
+                <MenuItem x:Name="EditDataMenuItem" Header="Редагувати" Click="EditDataMenuItem_Click"/>
+                <MenuItem x:Name="AddDataMenuItem" Header="Додати" Click="AddDataMenuItem_Click"/>
             </MenuItem>
             <MenuItem x:Name="SelectMenuItem" Header="Пошук" Click="SelectMenuItem_Click">
                 <MenuItem x:Name="SelectXMenuItem" Header="За прізвищем"/>
@@ -22,7 +22,7 @@
             </MenuItem>
             <MenuItem x:Name="AuthMenuItem" Header="Авторизація" Click="AuthMenuItem_Click"/>
         </Menu>
-        <DataGrid x:Name="HousingListDG" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="5,30,20,10" VerticalAlignment="Top" AutoGenerateColumns="False" ItemsSource="{Binding}" IsReadOnly="True" CanUserReorderColumns="False">
+        <DataGrid x:Name="HousingListDG" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="5,30,20,10" VerticalAlignment="Top" AutoGenerateColumns="False" ItemsSource="{Binding}" IsReadOnly="True" CanUserReorderColumns="False" MouseDoubleClick="HousingListDG_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding id}"/>
                 <DataGridTextColumn Header="Прізвище" Binding="{Binding surname}"/>

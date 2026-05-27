@@ -23,10 +23,18 @@ namespace housing
         public MainWindow()
         {
             InitializeComponent();
+            editWnd.mainWnd = this;
+            editWnd.editDB = this.editedRow;
+            editedRow.mainWnd = this;
         }
 
         public static Authorization loggedUser = new Authorization();
-        DataAccess dataConnection = new DataAccess();
+        public DataAccess dataConnection = new DataAccess();
+        public Housing editedHousing;
+        public EditDB editedRow = new EditDB();
+
+        EditInfoWindow editWnd = new EditInfoWindow();
+        LogInFormWindow logWnd = new LogInFormWindow();
 
         private void InfoHousingForm_Loaded(object sender, RoutedEventArgs e)
         {
@@ -64,6 +72,52 @@ namespace housing
         {
 
         }
+        private void EditDataMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            editedRow.housingAdd = false;
+
+            editWnd.idTextBox.Text = "";
+            editWnd.surnameTextBox.Text = "";
+            editWnd.adressTextBox.Text = "";
+            editWnd.areaTextBox.Text = "";
+
+            editWnd.Show();
+        }
+        private void AddDataMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            editedRow.housingAdd = true;
+
+            editedRow.housingNum = dataConnection.fList.Count;
+            if (editedRow.housingNum >= 85)
+            {
+                editedRow.housingAdd = false;
+                MessageBox.Show("Кількість записів перевищує ліміт, у вікні редагування видаліть зайві записи.", "Перевищено ліміт", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+
+            editWnd.idTextBox.Text = "";
+            editWnd.surnameTextBox.Text = "";
+            editWnd.adressTextBox.Text = "";
+            editWnd.areaTextBox.Text = "";
+
+            editWnd.Show();
+        }
+        private void HousingListDG_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            editedHousing = HousingListDG.SelectedItem as Housing;
+            if (editedHousing == null) return;
+
+            try
+            {
+                editWnd.surnameTextBox.Text = editedHousing.surname;
+                editWnd.adressTextBox.Text = editedHousing.adress;
+                editWnd.areaTextBox.Text = editedHousing.area.ToString();
+                editWnd.idTextBox.Text = editedHousing.id.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
         private void SelectMenuItem_Click(object sender, RoutedEventArgs e)
         {
@@ -72,8 +126,12 @@ namespace housing
 
         private void AuthMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            LogInFormWindow logWnd = new LogInFormWindow();
             logWnd.Show();
+        }
+
+        private void InfoHousingForm_Closed(object sender, EventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }
