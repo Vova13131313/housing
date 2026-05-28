@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace housing
 {
-    /// <summary>
-    /// Логика взаимодействия для EditInfoWindow.xaml
-    /// </summary>
     public partial class EditInfoWindow : Window
     {
         public EditInfoWindow()

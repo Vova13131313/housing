@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:housing"
         mc:Ignorable="d"
-        Title="Редагувати" Height="200" Width="380" Activated="EditInfoForm_Activated" Closing="EditInfoForm_Closing">
+        Title="Редагувати" Height="200" Width="380" Activated="EditInfoForm_Activated" Closing="EditInfoForm_Closing" ResizeMode="NoResize">
     <Grid Margin="20, 0, 0, 0">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>

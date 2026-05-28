@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:housing"
         mc:Ignorable="d"
-        Title="Авторизація" Height="140" Width="260" WindowStyle="ToolWindow" KeyDown="LogInForm_KeyDown" Closing="LogInForm_Closing">
+        Title="Авторизація" Height="140" Width="260" WindowStyle="ToolWindow" KeyDown="LogInForm_KeyDown" Closing="LogInForm_Closing" ResizeMode="NoResize" ShowInTaskbar="False">
     <Grid Margin="20, 0, 0, 0">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>

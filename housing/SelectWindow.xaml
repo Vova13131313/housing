@@ -1,0 +1,25 @@
+﻿<Window x:Name="SelectForm" x:Class="housing.SelectWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:housing"
+        mc:Ignorable="d"
+        Title="Пошук" Height="120" Width="280" Closing="SelectForm_Closing" ResizeMode="NoResize">
+    <Grid Margin="20, 0, 0, 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="100"/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" x:Name="selLabel" Content="Прізвище"/>
+        <TextBox Grid.Row="0" Grid.Column="1" x:Name="selTextBox" VerticalAlignment="Center"/>
+        <Button Grid.Row="1" Grid.Column="0" x:Name="selButton" Content="Пошук" Click="selButton_Click"/>
+        <Button Grid.Row="1" Grid.Column="1" x:Name="selCancelButton" Content="Скинути фільтр" Width="100" Height="30" Margin="10,0,10,0" VerticalAlignment="Top" Click="selCancelButton_Click"/>
+    </Grid>
+</Window>

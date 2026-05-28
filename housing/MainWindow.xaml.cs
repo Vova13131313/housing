@@ -26,6 +26,7 @@ namespace housing
             editWnd.mainWnd = this;
             editWnd.editDB = this.editedRow;
             editedRow.mainWnd = this;
+            selWnd.mainWnd = this;
         }
 
         public static Authorization loggedUser = new Authorization();
@@ -35,6 +36,7 @@ namespace housing
 
         EditInfoWindow editWnd = new EditInfoWindow();
         LogInFormWindow logWnd = new LogInFormWindow();
+        SelectWindow selWnd = new SelectWindow();
 
         private void InfoHousingForm_Loaded(object sender, RoutedEventArgs e)
         {
@@ -132,6 +134,26 @@ namespace housing
         private void InfoHousingForm_Closed(object sender, EventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void SelectXMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            selWnd.housingSel = 'X';
+
+            selWnd.selLabel.Content = "Прізвище";
+            selWnd.selTextBox.Text = "";
+
+            selWnd.Show();
+        }
+
+        private void SelectYMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            selWnd.housingSel = 'Y';
+
+            selWnd.selLabel.Content = "Площа     >";
+            selWnd.selTextBox.Text = "";
+
+            selWnd.Show();
         }
     }
 }
