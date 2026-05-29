@@ -1,4 +1,5 @@
 ﻿using Microsoft.SqlServer.Server;
+using Microsoft.Win32;
 using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI;
 using System;
@@ -15,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Xceed.Words.NET;
 
 namespace housing
 {
@@ -63,7 +65,63 @@ namespace housing
         }
         private void SaveDataMenuItem_Click(object sender, RoutedEventArgs e)
         {
+            var currentData = HousingListDG.ItemsSource as IEnumerable<Housing>;
 
+            if (currentData == null || !currentData.Any())
+            {
+                MessageBox.Show("Немає даних для збереження", "Увага", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            List<Housing> listToExport = currentData.ToList();
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Word Document (*.docx)|*.docx";
+            saveFileDialog.Title = "Зберегти таблицю як...";
+            saveFileDialog.FileName = "";
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                try
+                {
+                    using (var document = DocX.Create(saveFileDialog.FileName))
+                    {
+                        document.InsertParagraph("Звіт по житловому фонду")
+                            .FontSize(16)
+                            .Bold()
+                            .Alignment = Xceed.Document.NET.Alignment.center;
+
+                        document.InsertParagraph("");
+
+                        var table = document.InsertTable(listToExport.Count + 1, 4);
+                        table.Design = Xceed.Document.NET.TableDesign.TableGrid;
+
+                        table.Rows[0].Cells[0].Paragraphs.First().Append("ID").Bold();
+                        table.Rows[0].Cells[1].Paragraphs.First().Append("Прізвище").Bold();
+                        table.Rows[0].Cells[2].Paragraphs.First().Append("Адреса").Bold();
+                        table.Rows[0].Cells[3].Paragraphs.First().Append("Площа").Bold();
+
+                        for (int i = 0; i < listToExport.Count; i++)
+                        {
+                            var item = listToExport[i];
+                            int rowIndex = i + 1;
+
+                            table.Rows[rowIndex].Cells[0].Paragraphs.First().Append(item.id.ToString());
+                            table.Rows[rowIndex].Cells[1].Paragraphs.First().Append(item.surname);
+                            table.Rows[rowIndex].Cells[2].Paragraphs.First().Append(item.adress);
+                            table.Rows[rowIndex].Cells[3].Paragraphs.First().Append(item.area.ToString());
+                        }
+
+                        document.Save();
+                    }
+
+                    MessageBox.Show("Дані успішно збережено у файл Word", "Експорт", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Помилка при збереженні файлу: " + ex.Message, "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
         private void LoadDataMenuItem_Click(object sender, RoutedEventArgs e)
         {
