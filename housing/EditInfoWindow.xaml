@@ -1,0 +1,33 @@
+﻿<Window x:Name="EditInfoForm" x:Class="housing.EditInfoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:housing"
+        mc:Ignorable="d"
+        Title="Редагувати" Height="200" Width="380" Activated="EditInfoForm_Activated" Closing="EditInfoForm_Closing" ResizeMode="NoResize">
+    <Grid Margin="20, 0, 0, 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="3" Grid.Column="0" x:Name="idLabel" Content="Номер запису"/>
+        <TextBox Grid.Row="3" Grid.Column="1" x:Name="idTextBox" TextWrapping="Wrap" VerticalAlignment="Center" IsReadOnly="True"/>
+        <Label Grid.Row="0" Grid.Column="0" x:Name="surnameLabel" Content="Прізвище"/>
+        <TextBox Grid.Row="0" Grid.Column="1" x:Name="surnameTextBox" TextWrapping="Wrap" VerticalAlignment="Center"/>
+        <Label Grid.Row="1" Grid.Column="0" x:Name="adressLabel" Content="Адреса"/>
+        <TextBox Grid.Row="1" Grid.Column="1" x:Name="adressTextBox" TextWrapping="Wrap" VerticalAlignment="Center"/>
+        <Label Grid.Row="2" Grid.Column="0" x:Name="areaLabel" Content="Площа"/>
+        <TextBox Grid.Row="2" Grid.Column="1" x:Name="areaTextBox" TextWrapping="Wrap" VerticalAlignment="Center"/>
+        <Button Grid.Row="4" Grid.Column="0" x:Name="saveButton" Content="Зберегти" Click="saveButton_Click"/>
+        <Button Grid.Row="4" Grid.Column="1" x:Name="deleteButton" Content="Видалити" Width="100" HorizontalAlignment="Left" Click="deleteButton_Click"/>
+    </Grid>
+</Window>

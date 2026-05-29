@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace housing
 {
-    internal class DataAccess
+    public class DataAccess
     {
         public static string connStr;
 
