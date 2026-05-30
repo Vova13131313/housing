@@ -29,7 +29,7 @@ namespace housing
             if (housingSel == 'X')
             {
                 string searchText = selTextBox.Text.ToLower();
-                var filteredList = mainWnd.dataConnection.fList.Where(h => h.surname.ToLower().Contains(searchText)).ToList();
+                var filteredList = HousingLogic.FilerBySurname(mainWnd.dataConnection.fList, searchText);
 
                 mainWnd.HousingListDG.ItemsSource = filteredList;
             }
@@ -38,7 +38,7 @@ namespace housing
                 try
                 {
                     int searchArea = Convert.ToInt32(selTextBox.Text);
-                    var filteredList = mainWnd.dataConnection.fList.Where(h => h.area >= searchArea).ToList();
+                    var filteredList = HousingLogic.FilterByArea(mainWnd.dataConnection.fList, searchArea);
 
                     mainWnd.HousingListDG.ItemsSource = filteredList;
                 }
