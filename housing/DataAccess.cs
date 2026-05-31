@@ -16,33 +16,22 @@ namespace housing
 
         private void OpenDBFile()
         {
-            try
-            {
-                connStr = "Server=localhost; Database=housing; Port=3306; User=user; Password=13131313;";
-                MySqlConnection conn = new MySqlConnection(connStr);
-                MySqlCommand command = new MySqlCommand();
-                string commandString = "SELECT * FROM housingdata;";
-                command.CommandText = commandString;
-                command.Connection = conn;
-                command.Connection.Open();
-                MySqlDataReader reader = command.ExecuteReader();
+            connStr = "Server=localhost; Database=housing; Port=3306; User=user; Password=13131313;";
+            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlCommand command = new MySqlCommand();
+            string commandString = "SELECT * FROM housingdata;";
+            command.CommandText = commandString;
+            command.Connection = conn;
+            command.Connection.Open();
+            MySqlDataReader reader = command.ExecuteReader();
 
-                int i = 0;
-                while (reader.Read())
-                {
-                    fList.Add(new Housing((int)reader["id"], (string)reader["surname"], (string)reader["adress"], (int)reader["area"]));
-                    i++;
-                }
-                reader.Close();
-            }
-            catch (MySqlException e)
+            int i = 0;
+            while (reader.Read())
             {
-                MessageBox.Show("Помилка MySQL: " + e.Message, "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                fList.Add(new Housing((int)reader["id"], (string)reader["surname"], (string)reader["adress"], (int)reader["area"]));
+                i++;
             }
-            catch (System.Exception e)
-            {
-                MessageBox.Show("Непередбачена помилка: " + e.Message, "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            reader.Close();
         }
         public DataAccess()
         {
